@@ -3,7 +3,7 @@ import axios from 'axios';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://stripe-api-p9xc.onrender.com',
 });
 
 export const login = payload => api.post(`/users/login`, payload);

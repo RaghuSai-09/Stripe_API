@@ -30,7 +30,7 @@ const Checkout = () => {
 
   const handlePayment = async () => {
     try {
-      const response = await fetch('http://localhost:8000/users/create-payment-intent', {
+      const response = await fetch('https://stripe-api-p9xc.onrender.com/users/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
