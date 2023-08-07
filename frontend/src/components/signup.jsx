@@ -26,6 +26,9 @@ const Signup = () => {
         window.alert('Signup Successful');
         navigate('/login');
       }
+      else if (response.status === 400) {
+        window.alert('User already exists');
+      }
     } catch (error) {
       console.log(error);
     }
