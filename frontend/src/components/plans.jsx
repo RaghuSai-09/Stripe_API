@@ -8,6 +8,8 @@ const Plans = () => {
   const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
   const [isMonthlySelected, setMonthlySelected] = useState(true); 
   const [selectedColumn, setSelectedColumn] = useState(null); 
+  let selectedPlan = '';
+  let price = 0;
   const navigate = useNavigate();
 
   const handleMonthlyToggle = () => {
@@ -38,8 +40,7 @@ const Plans = () => {
   };
 
   const handleNextClick = () => {
-    let selectedPlan = '';
-    let price = 0;
+    
     switch (selectedColumn) {
       case 0:
         selectedPlan='Mobile';
@@ -62,8 +63,14 @@ const Plans = () => {
         price = 0;
         break;
     }
-    handleSubmit(selectedPlan, price, isMonthlySelected);
-    navigate('/plans')
+    if(selectedPlan === '') {
+      window.alert('Please select a plan');
+      navigate('/plans');
+    }
+    else{
+      handleSubmit(selectedPlan, price, isMonthlySelected);
+      navigate('/plans')
+  }
   };
 
 
@@ -137,10 +144,17 @@ const Plans = () => {
             </tr>
             <tr className={`border-b border-gray-300 `}>
               <td className={``}></td>
-              <td className={`text-center ${selectedColumn === 0 ? 'text-blue-900 font-semibold' : ''}`}>Smart TV</td> 
-              <td className={`text-center  ${selectedColumn === 1 ? 'text-blue-900 font-semibold' : ''}`}>Smart TV</td>
-              <td className={`text-center   ${selectedColumn === 2 ? 'text-blue-900 font-semibold' : ''}`}>Smart TV</td>
-              <td className={`text-center   ${selectedColumn === 3 ? 'text-blue-900 font-semibold' : ''}`}>Smart TV</td>
+              <td className={`text-center ${selectedColumn === 0 ? 'text-blue-900 font-semibold' : ''}`}></td> 
+              <td className={`text-center  ${selectedColumn === 1 ? 'text-blue-900 font-semibold' : ''}`}>Computer</td>
+              <td className={`text-center   ${selectedColumn === 2 ? 'text-blue-900 font-semibold' : ''}`}>Computer</td>
+              <td className={`text-center   ${selectedColumn === 3 ? 'text-blue-900 font-semibold' : ''}`}>Computer</td>
+            </tr>
+            <tr className={`border-b border-gray-300 `}>
+              <td className={``}></td>
+              <td className={`text-center ${selectedColumn === 0 ? 'text-blue-900 font-semibold' : ''}`}></td> 
+              <td className={`text-center  ${selectedColumn === 1 ? 'text-blue-900 font-semibold' : ''}`}>TV</td>
+              <td className={`text-center   ${selectedColumn === 2 ? 'text-blue-900 font-semibold' : ''}`}>TV</td>
+              <td className={`text-center   ${selectedColumn === 3 ? 'text-blue-900 font-semibold' : ''}`}> TV</td>
             </tr>
           </tbody>  
         </table>

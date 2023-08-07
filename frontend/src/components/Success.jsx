@@ -65,7 +65,7 @@ const PlanDetails = () => {
                     </Link>
                 </div>
                 <div className="text-sm opacity-70">
-                    Your subscription has <span></span>started on <span className="font-semibold">{date(0,0)}</span> and will auto-renew on <span className="font-semibold">{PlanDetails.isMonthlySelected? date(1,0): date(0,1)}</span>.
+                    Your subscription  <span> {plan? `has started on ${date(0,0)} and will auto-renew on${PlanDetails.isMonthlySelected? date(1,0): date(0,1)}` : `was cancelled and you will loose access to services on ${date(0,0)}`}</span> 
                 </div>
             </div>
         </div>
