@@ -2,9 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../api.js';
 
-
-
-
 const PlanDetails = () => {
 
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

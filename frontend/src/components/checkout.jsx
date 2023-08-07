@@ -4,6 +4,7 @@ import * as api from '../api.js';
 import { CardElement, useStripe, useElements, Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import config from '../config.json';
+import { useNavigate } from 'react-router-dom';
 
 const stripePromise = loadStripe(config.KEY);
 
@@ -13,6 +14,7 @@ const Checkout = () => {
   const [PlanDetails, setPlanDetails] = useState([]);
   const [PaymentError, setPaymentError] = useState('');
   const [PaymentSuccess, setPaymentSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const elements = useElements();
   const stripe = useStripe();
@@ -54,7 +56,7 @@ const Checkout = () => {
       } else {
 
         setPaymentSuccess(true);
-        window.location.href= '/success';
+        navigate('/success');
       }
     } catch (error) {
       console.error('Fetch error:', error);
