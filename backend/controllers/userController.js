@@ -52,7 +52,7 @@ exports.payment = async (req, res) => {
       }
 };
 exports.Plan = async (req, res) => {
-    const { user } = req.params.userId;
+    const { user } = req.params;
     console.log(user);
     try {
         const response = await User.findOne( user);   
