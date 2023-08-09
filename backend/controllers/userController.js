@@ -52,7 +52,7 @@ exports.payment = async (req, res) => {
       }
 };
 exports.Plan = async (req, res) => {
-    const { user } = req.params.userId;
+    const { user } = req.params;
     console.log(user);
     try {
         const response = await User.findOne( user);   
@@ -74,22 +74,27 @@ exports.getPlans = async (req, res) => {
 
 
     try {
-        const user = await User.findById(userId);
-        if (!user) {
-          return res.status(404).json({ message: 'User not found' });
+        const updatedUser = await User.findOneAndUpdate(
+            { _id: userId },
+            {
+                $set: {
+                    'plandetails.name': selectedPlan,
+                    'plandetails.price': price,
+                    'plandetails.isMonthlySelected': isMonthlySelected
+                }
+            },
+            { new: true } 
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: 'User not found' });
         }
-    
-        user.plandetails = {
-          name: selectedPlan,
-          price: price,
-          isMonthlySelected: isMonthlySelected
-        };
-        await user.save();
-        res.status(200).json({ message: 'Plan details saved successfully' });
-      } catch (error) {
-        console.error('Error saving plan details:', error);
+
+        res.status(200).json({ message: 'Plan details updated successfully' });
+    } catch (error) {
+        console.error('Error updating plan details:', error);
         res.status(500).json({ message: 'An error occurred' });
-      }
+    }
 };
 
 exports.cancel = async (req, res) => {
